@@ -1,0 +1,49 @@
+{
+  "type": "questicle:standard",
+  "name": "questicle.test",
+  "description": "questicle.test.desc",
+  "icon": {
+    "type": "questicle:item",
+    "item": {
+      "id": "minecraft:string"
+    }
+  },
+  "goals": [
+    {
+      "id": "collect_dirt",
+      "type": "questicle:collect",
+      "item": "#minecraft:dirt",
+      "count": 6
+    }
+  ],
+  "rewards": [
+    {
+      "type": "questicle:item",
+      "items":[
+        {
+          "id": "minecraft:cobblestone",
+          "count": 16
+        },        {
+          "id": "minecraft:blaze_powder",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "questicle:item",
+      "items": [{
+        "id": "minecraft:oak_log",
+        "count": 10
+      }]
+    },
+    {
+      "type": "questicle:xp",
+      "xp": 400
+    },
+    {
+      "type": "questicle:xp",
+      "xp": 400,
+      "is_levels": false
+    }
+  ]
+}

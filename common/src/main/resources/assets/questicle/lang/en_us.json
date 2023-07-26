@@ -1,0 +1,32 @@
+{
+  "questicle.error.no_quests": "No Quest Lists have been defined, the Quest interface cannot be opened!",
+  "questicle.ui.quest_lists": "Quest Lists",
+  "questicle.ui.save": "Save",
+  "questicle.text.invited": "%s has invited you to their party",
+  "questicle.text.invited.command": "Click here, or type %s to accept this invitation",
+  "questicle.text.invite.fail": "Unable to invite %s. They may already have an invitation pending",
+  "questicle.text.invite.success": "Invited %s to the party",
+  "questicle.text.invited.action": "Click here to accept",
+  "questicle.text.cancel_invite.success": "Canceled invitation to %s",
+  "questicle.text.cancel_invite.fail": "Unable to cancel the invitation for %s",
+  "questicle.text.accept_invite.success": "Successfully joined the party",
+  "questicle.text.accept_invite.fail": "Unable to join a party",
+  "questicle.text.killed": "killed",
+  "questicle.text.collected": "collected",
+  "questicle.text.claim_rewards": "Claim Rewards",
+  "questicle.goal.collect.item": "Collect %s %s",
+  "questicle.goal.collect.tag": "Collect %s %s",
+  "questicle.goal.kill_mob.mob": "Kill %s %s",
+  "questicle.goal.kill_mob.tag": "Kill %s %s",
+  "questicle.text.reward.xp": "Grant %s experience",
+  "questicle.text.reward.xp.levels": "Grant %s levels",
+
+  "questicle.test": "Test Quest 1",
+  "questicle.test.desc": "This is a test description for the first test quest. It is fairly long so you could provide instructions to players. It should be long enough for the scroll wheel to appear. This is another line of text",
+  "questicle.test_2": "Test Quest 2: Longer Name",
+  "questicle.test_2.desc": "This description is long enough so that it will overflow into the scrollbar most of the time. It can be tricky, because I don't want the goals to fall off thr screen if the description is as big as it is allowed to be!",
+  "questicle.category.test_category": "First Category",
+  "questicle.category.test_category_2": "Second Category",
+  "questicle.category.test_category_3": "Modern Industrialisation"
+
+}

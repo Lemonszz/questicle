@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "questicle",
+  "version": "${version}",
+  "name": "Questicle",
+  "description": "Questing Mod",
+  "authors": [
+    "Lemons"
+  ],
+  "license": "MIT",
+  "icon": "assets/questicle/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "party.lemons.questicle.fabric.QuesticleFabric"
+    ],
+    "client": [
+      "party.lemons.questicle.fabric.QuesticleFabricClient"
+    ]
+  },
+  "mixins": [
+    "questicle.mixins.json",
+    "questicle-common.mixins.json"
+  ],
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.20",
+    "architectury": ">=9.0.0"
+  }
+}

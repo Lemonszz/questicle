@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "party.lemons.questicle.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+    "goal.InventoryChangeTriggerMixin",
+    "goal.ChangeDimensionTriggerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

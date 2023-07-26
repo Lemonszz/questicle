@@ -1,0 +1,28 @@
+{
+  "name": "questicle.category.test_category_2",
+  "background_image": "questicle:/textures/gui/background_default.png",
+  "priority": 0,
+  "icon": {
+    "type": "questicle:item",
+    "item": "minecraft:clock"
+  },
+  "quests": [
+    {
+      "quest": "questicle:test_quest_1",
+      "x": 0,
+      "y": 0,
+      "connection_style": "questicle:standard",
+      "frame": "questicle:goal"
+    },
+    {
+      "quest": "questicle:test_quest_2",
+      "x": 0,
+      "y": -2,
+      "connection_style": "questicle:standard",
+      "frame": "questicle:challenge"
+    }
+  ],
+  "background_widgets": [
+
+  ]
+}

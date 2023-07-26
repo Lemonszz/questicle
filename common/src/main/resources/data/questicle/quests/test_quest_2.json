@@ -1,0 +1,88 @@
+{
+  "type": "questicle:standard",
+  "name": "questicle.test_2",
+  "description": "questicle.test_2.desc",
+  "icon": {
+    "type": "questicle:item",
+    "item": {
+      "id": "minecraft:stick"
+    }
+  },
+  "goals": [
+    {
+  "id": "kill_zombies",
+  "type": "questicle:kill_mob",
+  "mob": "minecraft:zombie",
+  "count": 4
+  },
+  {
+    "id": "kill_bee",
+    "type": "questicle:kill_mob",
+    "mob": "minecraft:bee",
+    "count": 3
+  },
+  {
+    "id": "kill_skeleton",
+    "type": "questicle:kill_mob",
+    "mob": "#minecraft:skeletons",
+    "count": 2
+  },
+  {
+    "id": "kill_dragon",
+    "type": "questicle:kill_mob",
+    "mob": "minecraft:ender_dragon",
+    "count": 1
+  },
+    {
+      "id": "kill_spider",
+      "type": "questicle:kill_mob",
+      "mob": "minecraft:spider",
+      "count": 1
+    },
+    {
+      "id": "kill_blaze",
+      "type": "questicle:kill_mob",
+      "mob": "minecraft:blaze",
+      "count": 1
+    },
+    {
+      "id": "kill_golem",
+      "type": "questicle:kill_mob",
+      "mob": "minecraft:iron_golem",
+      "count": 1
+    },
+    {
+      "id": "kill_buffer",
+      "type": "questicle:kill_mob",
+      "mob": "minecraft:pufferfish",
+      "tag": {
+        "PuffState": 2
+      },
+      "count": 1
+    }
+  ],
+  "dependencies": [
+    "questicle:test_quest_1"
+  ],
+  "rewards": [
+    {
+      "type": "questicle:item",
+      "items":[
+        {
+          "id": "minecraft:cobblestone",
+          "count": 16
+        },        {
+          "id": "minecraft:blaze_powder",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "questicle:item",
+      "items": [{
+        "id": "minecraft:oak_log",
+        "count": 10
+      }]
+    }
+  ]
+}

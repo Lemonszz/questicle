@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "party.lemons.questicle.mixin.fabric",
+
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+    "CreateWorldScreenMixin"
+  ],
+  "mixins": [
+    "ServerPacksSourceMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "questicle:standard",
+  "name": "questicle.test_3",
+  "description": "questicle.test_3.desc",
+  "icon": {
+    "type": "questicle:item",
+    "item": {
+      "id": "minecraft:blaze_rod"
+    }
+  },
+  "goals": [],
+  "dependencies": [
+    "questicle:test_quest_1"
+  ],
+  "rewards": [
+  ]
+}

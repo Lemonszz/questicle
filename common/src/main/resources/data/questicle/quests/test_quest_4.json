@@ -1,0 +1,17 @@
+{
+  "type": "questicle:standard",
+  "name": "questicle.test_4",
+  "description": "questicle.test_4.desc",
+  "icon": {
+    "type": "questicle:item",
+    "item": {
+      "id": "minecraft:stone_pickaxe"
+    }
+  },
+  "goals": [],
+  "dependencies": [
+    "questicle:test_quest_1"
+  ],
+  "rewards": [
+  ]
+}
