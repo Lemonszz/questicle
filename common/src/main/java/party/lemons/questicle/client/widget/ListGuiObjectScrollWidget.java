@@ -53,6 +53,9 @@ public class ListGuiObjectScrollWidget<T> extends GuiObjectScrollWidget<T>
         for(Pair<GuiObject<T>, T> obj : objects)
         {
             GuiObject<T> guiObj = obj.getFirst();
+            if(guiObj == null)
+                return;
+
             T ctx = obj.getSecond();
             int height = guiObj.getHeight(ctx);
 

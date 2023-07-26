@@ -62,7 +62,7 @@ public class QuestStorage
 
     public boolean setGoalComplete(String goal)
     {
-        CompoundTag tag = progress.get(goal);
+        CompoundTag tag = getProgress(goal);
         tag.putBoolean("completed", true);
 
         if(Quests.quests.get(getQuestID()).checkCompleteness(this))

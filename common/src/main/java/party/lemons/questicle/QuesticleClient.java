@@ -10,6 +10,7 @@ import net.minecraft.server.packs.PackType;
 import party.lemons.questicle.client.reward.ItemRewardDisplay;
 import party.lemons.questicle.client.reward.RewardDisplayRegistry;
 import party.lemons.questicle.client.reward.XpRewardDisplay;
+import party.lemons.questicle.client.tooltip.goal.ChangeDimensionGoalDisplay;
 import party.lemons.questicle.client.tooltip.quest.StandardQuestTooltip;
 import party.lemons.questicle.client.tooltip.TooltipRegistry;
 import party.lemons.questicle.client.frame.PresetFrameLoader;
@@ -93,6 +94,7 @@ public class QuesticleClient
     {
         GoalDisplayRegistry.register(GoalTypes.COLLECT_GOAL.get(), new CollectGoalDisplay());
         GoalDisplayRegistry.register(GoalTypes.KILL_MOB.get(), new KillMobDisplayGoal());
+        GoalDisplayRegistry.register(GoalTypes.CHANGE_DIMENSION.get(), new ChangeDimensionGoalDisplay());
     }
 
     public static void initRewardRenderers()
