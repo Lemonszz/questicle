@@ -40,6 +40,8 @@ public class QComponents
     public static final StandardTexture ICON_TROPHY_HOVER = new StandardTexture(FRAMES,0,196, 12, 12, 256, 256);
     public static final StandardTexture ICON_TROPHY_DISABLED = new StandardTexture(FRAMES,0,208, 12, 12, 256, 256);
 
+    public static final StandardTexture ICON_NETHER_PORTAL = new StandardTexture(FRAMES,175,0, 80, 80, 256, 256);
+
     public static final StandardTexture WIDGET_SCROLLBAR = new StandardTexture(FRAMES,48,240, 6, 16, 256, 256);
     public static final StandardTexture WIDGET_SCROLLBAR_HOVER = new StandardTexture(FRAMES,54,240, 6, 16, 256, 256);
 }

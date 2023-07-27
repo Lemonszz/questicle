@@ -18,6 +18,7 @@
   "questicle.goal.collect.tag": "Collect %s %s",
   "questicle.goal.kill_mob.mob": "Kill %s %s",
   "questicle.goal.kill_mob.tag": "Kill %s %s",
+  "questicle.goal.change_dimension": "Enter %s",
   "questicle.text.reward.xp": "Grant %s experience",
   "questicle.text.reward.xp.levels": "Grant %s levels",
 
