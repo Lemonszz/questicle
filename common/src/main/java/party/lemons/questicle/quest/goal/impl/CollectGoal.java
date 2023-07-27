@@ -7,6 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -22,25 +23,26 @@ import party.lemons.questicle.util.NBTUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CollectGoal implements Goal, InventoryCountGoal
+public class CollectGoal extends Goal implements InventoryCountGoal
 {
     public static String TAG_LAST_COUNT = "LastCount";
 
     public static final Codec<CollectGoal> CODEC = RecordCodecBuilder.create(instance ->
-            instance.group(
-                            Codec.STRING.fieldOf("id").forGetter(CollectGoal::id),
-                            Codec.either(BuiltInRegistries.ITEM.byNameCodec(), TagKey.hashedCodec(Registries.ITEM)).fieldOf("item").forGetter(CollectGoal::either),
-                            Codec.INT.optionalFieldOf("count", 1).forGetter(i->i.count)
-                    )
+            baseCodec(instance)
+                    .and(
+                            instance.group(
+                                    Codec.either(BuiltInRegistries.ITEM.byNameCodec(), TagKey.hashedCodec(Registries.ITEM)).fieldOf("item").forGetter(CollectGoal::either),
+                                    Codec.INT.optionalFieldOf("count", 1).forGetter(i->i.count)
+                            )                    )
                     .apply(instance, CollectGoal::new));
 
     private final Item checkItem;
     private final TagKey<Item> checkTag;
     private final boolean isTag;
     private final int count;
-    private final String id;
-
     public CollectGoal(String id, Either<Item, TagKey<Item>> item, int count){
+        super(id);
+
         this.checkItem = item.left().orElse(null);
         this.checkTag = item.right().orElse(null);
         if(checkTag == null && checkItem == null)   //TODO: does this even decode if both are null?
@@ -49,7 +51,6 @@ public class CollectGoal implements Goal, InventoryCountGoal
         isTag = checkItem == null;
 
         this.count = count;
-        this.id = id;
     }
 
     public boolean onInventoryChanged(Quest quest, QuestStorage storage, QuestParty party, ServerPlayer player, ItemStack stack)
@@ -80,11 +81,6 @@ public class CollectGoal implements Goal, InventoryCountGoal
     @Override
     public GoalType<?> type() {
         return GoalTypes.COLLECT_GOAL.get();
-    }
-
-    @Override
-    public String id() {
-        return id;
     }
 
     @Override

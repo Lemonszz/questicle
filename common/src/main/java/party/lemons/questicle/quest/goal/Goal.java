@@ -1,39 +1,57 @@
 package party.lemons.questicle.quest.goal;
 
+import com.mojang.datafixers.Products;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import party.lemons.questicle.party.QuestParty;
 import party.lemons.questicle.quest.quest.Quest;
 import party.lemons.questicle.quest.quest.storage.QuestStorage;
 
-public interface Goal
+public abstract class Goal
 {
-    GoalType<?> type();
+    protected static <P extends Goal> Products.P1<RecordCodecBuilder.Mu<P>, String> baseCodec(RecordCodecBuilder.Instance<P> instance) {
+        return instance.group(
+                Codec.STRING.fieldOf("id").forGetter(Goal::id)
+        );
+    }
+    private final String id;
 
-    String id();
+    public Goal(String id)
+    {
+        this.id = id;
+    }
 
-    default QuestStorage getStorage(QuestParty party, Quest quest)
+    public abstract GoalType<?> type();
+    public abstract Component getHoverTooltip(QuestStorage questStorage);
+
+    public String id(){
+        return this.id;
+    }
+
+    public QuestStorage getStorage(QuestParty party, Quest quest)
     {
         return party.getStorage().getQuestProgress(quest);
     }
 
-    default boolean onEntityKilled(Quest quest, QuestStorage storage, QuestParty party, ServerPlayer killer, LivingEntity killed)
+    public boolean onEntityKilled(Quest quest, QuestStorage storage, QuestParty party, ServerPlayer killer, LivingEntity killed)
     {
         return false;
     }
 
-    default boolean onInventoryChanged(Quest quest, QuestStorage storage, QuestParty party, ServerPlayer player, ItemStack stack)
+    public boolean onInventoryChanged(Quest quest, QuestStorage storage, QuestParty party, ServerPlayer player, ItemStack stack)
     {
         return false;
     }
 
-    default boolean onDimensionChanged(Quest quest, QuestStorage storage, QuestParty party, ServerPlayer player, ResourceLocation newDimension)
+    public boolean onDimensionChanged(Quest quest, QuestStorage storage, QuestParty party, ServerPlayer player, ResourceLocation newDimension)
     {
         return false;
     }
 
-    Component getHoverTooltip(QuestStorage questStorage);
 }
