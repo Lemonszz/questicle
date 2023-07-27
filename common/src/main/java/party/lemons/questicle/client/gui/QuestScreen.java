@@ -417,7 +417,7 @@ public class QuestScreen extends Screen
             return;
 
         IconRenderer iconRenderer = IconRenderers.getRenderer(quest.icon().type());
-        iconRenderer.render(g, drawX, drawY, IconRenderer.IconRendererContext.create(quest.icon(), display.frame()), mouseX, mouseY, delta);
+        iconRenderer.render(g, drawX, drawY, IconRenderer.IconRendererContext.create(quest.icon(), display.frame(), zoom), mouseX, mouseY, delta);
 
         //Decoration
         if(ClientStorage.clientParty.getStorage().isQuestCompleted(quest) && ClientStorage.clientParty.getStorage().hasPendingRewards(Minecraft.getInstance().player, quest))

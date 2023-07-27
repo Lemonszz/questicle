@@ -7,11 +7,11 @@ import party.lemons.questicle.quest.icon.QuestIcon;
 
 public interface IconRenderer<T extends QuestIcon> extends GuiObject<IconRenderer.IconRendererContext<T>>
 {
-    record IconRendererContext<T extends QuestIcon>(T icon, @Nullable QuestFrame frame)
+    record IconRendererContext<T extends QuestIcon>(T icon, @Nullable QuestFrame frame, float zoom)
     {
-        public static <T extends QuestIcon> IconRendererContext<T> create(T icon, @Nullable QuestFrame frame)
+        public static <T extends QuestIcon> IconRendererContext<T> create(T icon, @Nullable QuestFrame frame, float zoom)   //TODO: this method is pointless
         {
-            return new IconRendererContext<>(icon ,frame);
+            return new IconRendererContext<>(icon ,frame, zoom);
         }
 
         public int getFrameWidth()

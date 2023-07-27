@@ -10,10 +10,13 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.joml.Matrix4f;
 import party.lemons.questicle.Questicle;
@@ -21,10 +24,13 @@ import party.lemons.questicle.QuesticleClient;
 import party.lemons.questicle.client.shader.QShaders;
 
 import java.util.List;
+import java.util.Optional;
 
 public class DrawUtils
 {
     public static int DEFAULT_STRING_HEIGHT = Minecraft.getInstance().font.lineHeight;
+    public static int MOB_DOWNSCALE_SIZE = 4;
+    public static int MOB_DOWNSCALE_AMOUNT = 3;
 
     private static void executeRenderCall(RenderCall renderCall)
     {
@@ -110,6 +116,29 @@ public class DrawUtils
         buffer.vertex(posMatrix, drawX + drawWidth, drawY, 0).endVertex();
         BufferUploader.drawWithShader(buffer.end());
         RenderSystem.disableBlend();
+    }
+
+    public static void drawEntityIcon(GuiGraphics graphics, List<EntityType<?>> entityList, Optional<CompoundTag> tag, int drawX, int drawY, float iconScale)
+    {
+        int index = Mth.abs((QuesticleClient.tick / 30) % entityList.size());
+        EntityType<?> type = entityList.get(index);
+        Entity entity = type.create(Minecraft.getInstance().level);
+        tag.ifPresent(compoundTag -> entity.load(compoundTag));
+
+        float width = entity.getBbWidth();
+        float height = entity.getBbHeight();
+        float scale = (float)Math.pow(24, Math.max(0.5, 1.4 - height));
+        if(width >= MOB_DOWNSCALE_SIZE)
+            scale /= MOB_DOWNSCALE_AMOUNT;
+
+        if(entity instanceof LivingEntity livingEntity)
+        {
+            livingEntity.yBodyRot = 155.0F;
+            livingEntity.setYRot(155F);
+            livingEntity.yHeadRot = livingEntity.getYRot();
+        }
+
+        DrawUtils.drawEntity(graphics, entity, drawX, drawY, scale * iconScale);
     }
 
     public static void drawEntity(GuiGraphics graphics, Entity entity, int drawX, int drawY, float scale)

@@ -7,6 +7,7 @@ import dev.architectury.registry.client.keymappings.KeyMappingRegistry;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
+import party.lemons.questicle.client.icon.MobIconRenderer;
 import party.lemons.questicle.client.reward.ItemRewardDisplay;
 import party.lemons.questicle.client.reward.RewardDisplayRegistry;
 import party.lemons.questicle.client.reward.XpRewardDisplay;
@@ -17,7 +18,7 @@ import party.lemons.questicle.client.frame.PresetFrameLoader;
 import party.lemons.questicle.client.frame.PresetFrameRenderer;
 import party.lemons.questicle.client.frame.TextureFrameRenderer;
 import party.lemons.questicle.client.gui.QuestScreen;
-import party.lemons.questicle.client.icon.BlankFrameRenderer;
+import party.lemons.questicle.client.icon.BlankIconRenderer;
 import party.lemons.questicle.client.icon.IconRenderers;
 import party.lemons.questicle.client.icon.ItemIconRenderer;
 import party.lemons.questicle.client.shader.QShaders;
@@ -77,7 +78,8 @@ public class QuesticleClient
     public static void initIconRenderers()
     {
         IconRenderers.registerRenderer(QuestIconTypes.ITEM.get(), new ItemIconRenderer());
-        IconRenderers.registerRenderer(QuestIconTypes.BLANK.get(), new BlankFrameRenderer());
+        IconRenderers.registerRenderer(QuestIconTypes.BLANK.get(), new BlankIconRenderer());
+        IconRenderers.registerRenderer(QuestIconTypes.MOB.get(), new MobIconRenderer());
     }
 
     public static void initWidgetRenderers()
