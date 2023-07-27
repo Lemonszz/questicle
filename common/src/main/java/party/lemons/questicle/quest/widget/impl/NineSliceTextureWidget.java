@@ -9,7 +9,7 @@ import party.lemons.questicle.quest.widget.Widget;
 import party.lemons.questicle.quest.widget.WidgetType;
 import party.lemons.questicle.quest.widget.WidgetTypes;
 
-public record NineSliceTextureWidget(int x, int y, int width, int height, boolean fill, int border, int textureX, int textureY, int textureWidth, int textureHeight, ResourceLocation texture, int sheetWidth, int sheetHeight) implements Widget {
+public record NineSliceTextureWidget(int x, int y, int width, int height, boolean fill, int borderX, int borderY, int textureX, int textureY, int textureWidth, int textureHeight, ResourceLocation texture, int sheetWidth, int sheetHeight) implements Widget {
 
     public static Codec<NineSliceTextureWidget> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
@@ -18,7 +18,8 @@ public record NineSliceTextureWidget(int x, int y, int width, int height, boolea
                     Codec.INT.fieldOf("width").forGetter(NineSliceTextureWidget::width),
                     Codec.INT.fieldOf("height").forGetter(NineSliceTextureWidget::height),
                     Codec.BOOL.optionalFieldOf("fill", true).forGetter(NineSliceTextureWidget::fill),
-                    Codec.INT.fieldOf("border").forGetter(NineSliceTextureWidget::border),
+                    Codec.INT.fieldOf("border_x").forGetter(NineSliceTextureWidget::borderX),
+                    Codec.INT.fieldOf("border_y").forGetter(NineSliceTextureWidget::borderY),
                     Codec.INT.fieldOf("texture_x").forGetter(NineSliceTextureWidget::textureX),
                     Codec.INT.fieldOf("texture_y").forGetter(NineSliceTextureWidget::textureY),
                     Codec.INT.fieldOf("texture_width").forGetter(NineSliceTextureWidget::textureWidth),

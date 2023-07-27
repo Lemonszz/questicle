@@ -12,7 +12,7 @@ public class NineSliceWidgetRenderer implements WidgetRenderer<NineSliceTextureW
                 widget.texture(),
                 widget.textureX(), widget.textureY(),
                 widget.textureWidth(), widget.textureHeight(),
-                widget.border(), widget.border(), widget.sheetWidth(),
+                widget.borderX(), widget.borderY(), widget.sheetWidth(),
                 widget.sheetHeight(), widget.fill()
         ).render(g, originX + widget.x(), originY + widget.y(), widget.width(), widget.height());
     }
