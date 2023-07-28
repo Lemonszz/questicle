@@ -39,7 +39,7 @@ public class QuestListButtonGuiObject implements GuiObject<QuestListButtonGuiObj
         IconRenderer iconRenderer = IconRenderers.getRenderer(context.list().icon().type());
         int iconWidth = 0;
         if(iconRenderer != null) {
-            IconRenderer.IconRendererContext iconCtx = IconRenderer.IconRendererContext.create(context.list().icon(), null, 1.0F);
+            IconRenderer.IconRendererContext iconCtx = new IconRenderer.IconRendererContext(context.list().icon(), null);
             int iconY = drawY + 4;
 
             iconRenderer.render(graphics, drawX + 3, iconY,iconCtx, mouseX, mouseY, delta);
