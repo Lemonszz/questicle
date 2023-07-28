@@ -30,7 +30,7 @@ import java.util.Optional;
 public class DrawUtils
 {
     public static int DEFAULT_STRING_HEIGHT = Minecraft.getInstance().font.lineHeight;
-    public static int MOB_DOWNSCALE_SIZE = 4;
+    public static float MOB_DOWNSCALE_SIZE = 4;
     public static int MOB_DOWNSCALE_AMOUNT = 3;
 
     private static void executeRenderCall(RenderCall renderCall)
@@ -129,7 +129,7 @@ public class DrawUtils
         float width = entity.getBbWidth();
         float height = entity.getBbHeight();
         float scale = (float)Math.pow(24, Math.max(0.5, 1.4 - height));
-        if(width >= MOB_DOWNSCALE_SIZE)
+        if(width >= MOB_DOWNSCALE_SIZE || height >= MOB_DOWNSCALE_SIZE)
             scale /= MOB_DOWNSCALE_AMOUNT;
 
         if(entity instanceof LivingEntity livingEntity)

@@ -18,6 +18,7 @@ public record TextureData(ResourceLocation texture, int x, int y, int width, int
     public static final Map<ResourceLocation, TextureData> BUILTIN = new ImmutableMap.Builder<ResourceLocation, TextureData>()
             .put(Questicle.id("nether_fortress"), new TextureData(BUILTIN_TEXTURE, 0, 0, 92, 92, 512, 512))
             .put(Questicle.id("nether_portal"), new TextureData(BUILTIN_TEXTURE, 93, 0, 92, 92, 512, 512))
+            .put(Questicle.id("wither"), new TextureData(BUILTIN_TEXTURE, 186, 0, 92, 92, 512, 512))
             .build();
 
 

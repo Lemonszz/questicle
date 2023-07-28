@@ -94,8 +94,15 @@ public interface Quest
             if(!questStorage.isGoalComplete(goal)) {
                 if(goal.onInventoryChanged(this, questStorage, party, player, stack))
                 {
-                    if(questStorage.setGoalComplete(goal))
+                    if(questStorage.setGoalComplete(goal)) {
                         storage.onQuestComplete(this);
+
+                        /*
+                                TODO: Loop through the quests again so any new active quest the player has the items for already is completed.
+                                The problem is that Collect goals will only check the stack parameter, so we'd have to loop though every item in the inventory?
+                                So this for a collect quest when it becomes active?
+                         */
+                    }
                 }
             }
         }
