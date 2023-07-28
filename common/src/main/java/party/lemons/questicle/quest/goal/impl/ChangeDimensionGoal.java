@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import party.lemons.questicle.client.texture.TextureData;
 import party.lemons.questicle.party.QuestParty;
 import party.lemons.questicle.quest.goal.Goal;
 import party.lemons.questicle.quest.goal.GoalType;
@@ -12,6 +13,8 @@ import party.lemons.questicle.quest.goal.GoalTypes;
 import party.lemons.questicle.quest.quest.Quest;
 import party.lemons.questicle.quest.quest.storage.QuestStorage;
 import party.lemons.questicle.util.QUtil;
+
+import java.util.Optional;
 
 public class ChangeDimensionGoal extends Goal {
 
@@ -25,9 +28,9 @@ public class ChangeDimensionGoal extends Goal {
 
     private final ResourceLocation targetDimension;
 
-    public ChangeDimensionGoal(String id, ResourceLocation targetDimension)
+    public ChangeDimensionGoal(String id, Optional<TextureData> icon, ResourceLocation targetDimension)
     {
-        super(id);
+        super(id, icon);
         this.targetDimension = targetDimension;
     }
 

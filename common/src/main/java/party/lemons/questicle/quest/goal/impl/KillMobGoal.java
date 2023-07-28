@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import party.lemons.questicle.client.texture.TextureData;
 import party.lemons.questicle.party.QuestParty;
 import party.lemons.questicle.quest.goal.Goal;
 import party.lemons.questicle.quest.goal.GoalType;
@@ -46,8 +47,8 @@ public class KillMobGoal extends Goal
     private final int count;
     private final Optional<CompoundTag> tag;
 
-    public KillMobGoal(String id, Either<EntityType<?>, TagKey<EntityType<?>>> item, Optional<CompoundTag> tag, int count){
-        super(id);
+    public KillMobGoal(String id, Optional<TextureData> icon, Either<EntityType<?>, TagKey<EntityType<?>>> item, Optional<CompoundTag> tag, int count){
+        super(id, icon);
 
         this.targetMob = item.left().orElse(null);
         this.targetTag = item.right().orElse(null);

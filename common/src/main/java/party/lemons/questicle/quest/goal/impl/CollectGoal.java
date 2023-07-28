@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import party.lemons.questicle.client.texture.TextureData;
 import party.lemons.questicle.party.QuestParty;
 import party.lemons.questicle.quest.goal.Goal;
 import party.lemons.questicle.quest.goal.GoalType;
@@ -22,6 +23,7 @@ import party.lemons.questicle.util.NBTUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CollectGoal extends Goal implements InventoryCountGoal
 {
@@ -40,8 +42,8 @@ public class CollectGoal extends Goal implements InventoryCountGoal
     private final TagKey<Item> checkTag;
     private final boolean isTag;
     private final int count;
-    public CollectGoal(String id, Either<Item, TagKey<Item>> item, int count){
-        super(id);
+    public CollectGoal(String id, Optional<TextureData> icon, Either<Item, TagKey<Item>> item, int count){
+        super(id, icon);
 
         this.checkItem = item.left().orElse(null);
         this.checkTag = item.right().orElse(null);

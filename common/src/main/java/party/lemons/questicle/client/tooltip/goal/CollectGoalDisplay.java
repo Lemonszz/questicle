@@ -10,6 +10,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 import org.joml.Vector2i;
 import party.lemons.questicle.client.DrawUtils;
+import party.lemons.questicle.client.gui.QComponents;
 import party.lemons.questicle.client.tooltip.ItemStackTooltip;
 import party.lemons.questicle.quest.goal.impl.CollectGoal;
 import party.lemons.questicle.quest.quest.storage.QuestStorage;
@@ -23,11 +24,12 @@ public class CollectGoalDisplay implements GoalDisplay<CollectGoal>
 
     @Override
     public void render(GuiGraphics graphics, int drawX, int drawY, GoalDisplayContext<CollectGoal> context, int mouseX, int mouseY, float delta) {
-        CollectGoal goal = context.goal();
-        QuestStorage storage = context.questStorage();
 
-        List<ItemStack> validStacks = goal.getValidStacks();
-        lastDrawnStack = DrawUtils.drawItemStackList(graphics, validStacks, drawX, drawY);
+        if(!drawOverrideIcon(graphics, drawX, drawY, context))
+        {
+            List<ItemStack> validStacks = context.goal().getValidStacks();
+            lastDrawnStack = DrawUtils.drawItemStackList(graphics, validStacks, drawX, drawY);
+        }
 
         Component text = getText(context);
         graphics.drawString(Minecraft.getInstance().font, text, drawX + 18, drawY + (DrawUtils.DEFAULT_STRING_HEIGHT / 2), 0xFFFFFF);

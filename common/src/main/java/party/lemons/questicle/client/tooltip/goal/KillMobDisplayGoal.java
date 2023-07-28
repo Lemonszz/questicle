@@ -11,6 +11,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import org.joml.Vector2i;
 import party.lemons.questicle.QuesticleClient;
 import party.lemons.questicle.client.DrawUtils;
@@ -24,10 +25,11 @@ public class KillMobDisplayGoal implements GoalDisplay<KillMobGoal>
     @Override
     public void render(GuiGraphics graphics, int drawX, int drawY, GoalDisplayContext<KillMobGoal> context, int mouseX, int mouseY, float delta)
     {
-        KillMobGoal goal = context.goal();
-
-        List<EntityType<?>> validMobs = goal.getValidMobs();
-        DrawUtils.drawEntityIcon(graphics, validMobs, goal.tag(), drawX + 8, drawY + 12, 1.0F);
+        if(!drawOverrideIcon(graphics, drawX, drawY, context))
+        {
+            List<EntityType<?>> validMobs = context.goal().getValidMobs();
+            DrawUtils.drawEntityIcon(graphics, validMobs, context.goal().tag(), drawX + 8, drawY + 12, 1.0F);
+        }
 
         Component text = getText(context);
         graphics.drawString(Minecraft.getInstance().font, text, drawX + 18, drawY + (DrawUtils.DEFAULT_STRING_HEIGHT / 2), 0xFFFFFF);

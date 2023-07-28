@@ -22,6 +22,7 @@ import org.joml.Matrix4f;
 import party.lemons.questicle.Questicle;
 import party.lemons.questicle.QuesticleClient;
 import party.lemons.questicle.client.shader.QShaders;
+import party.lemons.questicle.client.texture.TextureData;
 
 import java.util.List;
 import java.util.Optional;
@@ -175,5 +176,10 @@ public class DrawUtils
         graphics.renderItemDecorations(Minecraft.getInstance().font, stack, drawX, drawY);
 
         return stack;
+    }
+
+    public static void drawTexture(GuiGraphics graphics, TextureData tex, int drawX, int drawY, int width, int height)
+    {
+        graphics.blit(tex.texture(), drawX, drawY, width, height, tex.x(), tex.y(), tex.width(), tex.height(), tex.textureWidth(), tex.textureHeight());
     }
 }

@@ -9,23 +9,28 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
+import party.lemons.questicle.client.texture.TextureData;
 import party.lemons.questicle.party.QuestParty;
 import party.lemons.questicle.quest.quest.Quest;
 import party.lemons.questicle.quest.quest.storage.QuestStorage;
 
+import java.util.Optional;
+
 public abstract class Goal
 {
-    protected static <P extends Goal> Products.P1<RecordCodecBuilder.Mu<P>, String> baseCodec(RecordCodecBuilder.Instance<P> instance) {
+    protected static <P extends Goal> Products.P2<RecordCodecBuilder.Mu<P>, String, Optional<TextureData>> baseCodec(RecordCodecBuilder.Instance<P> instance) {
         return instance.group(
-                Codec.STRING.fieldOf("id").forGetter(Goal::id)
-
+                Codec.STRING.fieldOf("id").forGetter(Goal::id),
+                TextureData.CODEC.optionalFieldOf("icon").forGetter(Goal::icon)
         );
     }
     private final String id;
+    private final Optional<TextureData> icon;
 
-    public Goal(String id)
+    public Goal(String id, Optional<TextureData> icon)
     {
         this.id = id;
+        this.icon = icon;
     }
 
     public abstract GoalType<?> type();
@@ -33,6 +38,11 @@ public abstract class Goal
 
     public String id(){
         return this.id;
+    }
+
+    public Optional<TextureData> icon()
+    {
+        return icon;
     }
 
     public QuestStorage getStorage(QuestParty party, Quest quest)

@@ -8,10 +8,10 @@ public interface QuestFrame
 {
     TextureQuestFrame DEFAULT = new TextureQuestFrame(
             26, 26,
-            new TextureData(Questicle.id("textures/gui/frames.png"), 0, 26, 26, 26),
-            new TextureData(Questicle.id("textures/gui/frames.png"), 0, 0, 26, 26),
-            new TextureData(Questicle.id("textures/gui/frames.png"), 0, 52, 26, 26),
-            new TextureData(Questicle.id("textures/gui/frames.png"), 0, 78, 26, 26),
+            new TextureData(Questicle.id("textures/gui/frames.png"), 0, 26, 26, 26, 256, 256),
+            new TextureData(Questicle.id("textures/gui/frames.png"), 0, 0, 26, 26, 256, 256),
+            new TextureData(Questicle.id("textures/gui/frames.png"), 0, 52, 26, 26, 256, 256),
+            new TextureData(Questicle.id("textures/gui/frames.png"), 0, 78, 26, 26, 256, 256),
             255, 255
     );
 
