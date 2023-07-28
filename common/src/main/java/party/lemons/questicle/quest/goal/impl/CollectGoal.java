@@ -7,7 +7,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -34,7 +33,8 @@ public class CollectGoal extends Goal implements InventoryCountGoal
                     .and(
                             instance.group(
                                     Codec.either(BuiltInRegistries.ITEM.byNameCodec(), TagKey.hashedCodec(Registries.ITEM)).fieldOf("item").forGetter(CollectGoal::either),
-                                    Codec.INT.optionalFieldOf("count", 1).forGetter(i->i.count)
+                                    Codec.INT.optionalFieldOf("count", 1).forGetter(i->i.count),
+                                    CompoundTag.CODEC.optionalFieldOf("tag").forGetter(i->i.dataTag)
                             )                    )
                     .apply(instance, CollectGoal::new));
 
@@ -42,7 +42,8 @@ public class CollectGoal extends Goal implements InventoryCountGoal
     private final TagKey<Item> checkTag;
     private final boolean isTag;
     private final int count;
-    public CollectGoal(String id, Optional<TextureData> icon, Either<Item, TagKey<Item>> item, int count){
+    private final Optional<CompoundTag> dataTag;
+    public CollectGoal(String id, Optional<TextureData> icon, Either<Item, TagKey<Item>> item, int count, Optional<CompoundTag> dataTag){
         super(id, icon);
 
         this.checkItem = item.left().orElse(null);
@@ -53,6 +54,7 @@ public class CollectGoal extends Goal implements InventoryCountGoal
         isTag = checkItem == null;
 
         this.count = count;
+        this.dataTag = dataTag;
     }
 
     public boolean onInventoryChanged(Quest quest, QuestStorage storage, QuestParty party, ServerPlayer player, ItemStack stack)
@@ -63,6 +65,14 @@ public class CollectGoal extends Goal implements InventoryCountGoal
         }
         else if(!stack.is(checkItem))
             return false;
+
+        if(dataTag.isPresent() && !isTag)
+        {
+            ItemStack withData = checkItem.getDefaultInstance();
+            withData.setTag(dataTag.get().copy());
+            if(!ItemStack.isSameItemSameTags(stack, withData))
+                return false;
+        }
 
         int num = NBTUtil.setInt(TAG_LAST_COUNT, getCount(party.getOnlinePlayers(player.getServer())), storage.getProgress(this));
         party.getStorage().markDirty();
@@ -112,7 +122,10 @@ public class CollectGoal extends Goal implements InventoryCountGoal
             BuiltInRegistries.ITEM.getTagOrEmpty(checkTag).forEach((it)->li.add(new ItemStack(it.value())));
             return li;
         }
+        ItemStack defaultStack = checkItem.getDefaultInstance();
+        dataTag.ifPresent(tag -> defaultStack.setTag(tag.copy()));
 
-        return List.of(checkItem.getDefaultInstance());
+
+        return List.of(defaultStack);
     }
 }

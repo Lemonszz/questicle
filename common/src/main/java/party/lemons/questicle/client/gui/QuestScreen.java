@@ -311,7 +311,7 @@ public class QuestScreen extends Screen
         titleBGTexture.render(g, displayX, displayY + 19, displayWidth, 17);
 
         Component title = Component.translatable(displayQuest.displayName());
-        renderDisplayAt(g, sidebarList.getOrNull(displayQuest), displayX + 4, displayY + 15, mouseX, mouseY, delta, false);
+        renderDisplayAt(g, sidebarList.getOrNull(displayQuest), displayX + 4, displayY + 15, mouseX, mouseY, delta, false, false);
 
         g.drawString(font, title, displayX + 30, displayY + 23, 0xFFFFFF);  //TODO: scrolling string
     }
@@ -377,12 +377,12 @@ public class QuestScreen extends Screen
         {
             if(shouldRender(display))
             {
-                renderDisplay(g, display, zoomMouseX, zoomMouseY, mouseX, mouseY, delta, true);
+                renderDisplay(g, display, zoomMouseX, zoomMouseY, mouseX, mouseY, delta, true, true);
             }
         }
     }
 
-    private void renderDisplay(GuiGraphics g, QuestDisplay display, double zoomMouseX, double zoomMouseY, double mouseX, double mouseY, float delta, boolean checkHover)
+    private void renderDisplay(GuiGraphics g, QuestDisplay display, double zoomMouseX, double zoomMouseY, double mouseX, double mouseY, float delta, boolean checkHover, boolean checkStatus)
     {
         int startX = questsCenterX();
         int startY = questsCenterY();
@@ -396,7 +396,7 @@ public class QuestScreen extends Screen
 
         boolean hover = checkHover && isOverQuestArea(mouseX, mouseY) && zoomMouseX >= drawX && zoomMouseY >= drawY && zoomMouseX < drawX + display.frame().width() && zoomMouseY < drawY + display.frame().height();
 
-        renderDisplayAt(g, display, drawX, drawY, (int)mouseX, (int)mouseY, delta, hover);
+        renderDisplayAt(g, display, drawX, drawY, (int)mouseX, (int)mouseY, delta, hover, checkStatus);
 
         if(hover)
         {
@@ -405,7 +405,7 @@ public class QuestScreen extends Screen
         }
     }
 
-    private void renderDisplayAt(GuiGraphics g, QuestDisplay display, int drawX, int drawY, int mouseX, int mouseY, float delta, boolean hover)
+    private void renderDisplayAt(GuiGraphics g, QuestDisplay display, int drawX, int drawY, int mouseX, int mouseY, float delta, boolean hover, boolean checkStatus)
     {
         //Frame
         QuestFrame frame = display.frame();
@@ -418,7 +418,7 @@ public class QuestScreen extends Screen
             return;
 
         PartyStorage partyStorage = ClientStorage.clientParty.getStorage();
-        if(quest.getQuestStatus(partyStorage) == QuestStatus.UNAVAILABLE)
+        if(checkStatus && quest.getQuestStatus(partyStorage) == QuestStatus.UNAVAILABLE)
             g.setColor(0.2F, 0.2F, 0.2F, 1.0F);
 
 
