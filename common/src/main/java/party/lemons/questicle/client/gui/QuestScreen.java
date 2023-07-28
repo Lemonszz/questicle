@@ -25,6 +25,7 @@ import party.lemons.questicle.client.tooltip.goal.GoalDisplay;
 import party.lemons.questicle.client.tooltip.goal.GoalDisplayRegistry;
 import party.lemons.questicle.client.tooltip.quest.QuestTooltip;
 import party.lemons.questicle.client.widget.*;
+import party.lemons.questicle.party.storage.PartyStorage;
 import party.lemons.questicle.quest.QuestList;
 import party.lemons.questicle.quest.QuestLists;
 import party.lemons.questicle.quest.display.QuestDisplay;
@@ -416,11 +417,18 @@ public class QuestScreen extends Screen
         if(quest == null)
             return;
 
+        PartyStorage partyStorage = ClientStorage.clientParty.getStorage();
+        if(quest.getQuestStatus(partyStorage) == QuestStatus.UNAVAILABLE)
+            g.setColor(0.2F, 0.2F, 0.2F, 1.0F);
+
+
         IconRenderer iconRenderer = IconRenderers.getRenderer(quest.icon().type());
         iconRenderer.render(g, drawX, drawY, new IconRenderer.IconRendererContext<>(quest.icon(), display.frame()), mouseX, mouseY, delta);
 
+        g.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+
         //Decoration
-        if(ClientStorage.clientParty.getStorage().isQuestCompleted(quest) && ClientStorage.clientParty.getStorage().hasPendingRewards(Minecraft.getInstance().player, quest))
+        if(partyStorage.isQuestCompleted(quest) && partyStorage.hasPendingRewards(Minecraft.getInstance().player, quest))
         {
             frameRenderer.renderRewardPending(g, display.frame(), drawX, drawY, delta, hover);
         }

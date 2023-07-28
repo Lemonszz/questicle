@@ -18,6 +18,7 @@ import party.lemons.questicle.QuesticleClient;
 import party.lemons.questicle.quest.icon.impl.BlankQuestIcon;
 import party.lemons.questicle.quest.icon.impl.ItemQuestIcon;
 import party.lemons.questicle.quest.icon.impl.MobQuestIcon;
+import party.lemons.questicle.quest.icon.impl.TextureQuestIcon;
 
 import java.util.Optional;
 
@@ -30,6 +31,7 @@ public class QuestIconTypes
     public static final RegistrySupplier<QuestIconType<BlankQuestIcon>> BLANK = ICON_TYPES.register(Questicle.id("blank"), ()-> new QuestIconType<>(BlankQuestIcon.CODEC));
     public static final RegistrySupplier<QuestIconType<ItemQuestIcon>> ITEM = ICON_TYPES.register(Questicle.id("item"), ()-> new QuestIconType<>(ItemQuestIcon.CODEC));
     public static final RegistrySupplier<QuestIconType<MobQuestIcon>> MOB = ICON_TYPES.register(Questicle.id("mob"), ()-> new QuestIconType<>(MobQuestIcon.CODEC));
+    public static final RegistrySupplier<QuestIconType<TextureQuestIcon>> TEXTURE = ICON_TYPES.register(Questicle.id("texture"), ()-> new QuestIconType<>(TextureQuestIcon.CODEC));
 
     public static void init(){
         ICON_TYPES.register();
