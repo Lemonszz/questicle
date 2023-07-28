@@ -8,6 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import party.lemons.questicle.network.S2cSyncParty;
 import party.lemons.questicle.party.storage.PartyStorage;
+import party.lemons.questicle.quest.goal.impl.LocationGoal;
 import party.lemons.questicle.quest.quest.Quest;
 
 import java.util.ArrayList;
@@ -96,6 +97,16 @@ public interface QuestParty
         }
     }
 
+    default void checkLocation(LocationGoal.LocationContext ctx)
+    {
+
+        for(Quest quest : getStorage().activeQuests())
+        {
+
+            quest.checkLocation(this, getStorage(), ctx);
+        }
+    }
+
     default List<ServerPlayer> getOnlinePlayers(MinecraftServer server)
     {
         List<ServerPlayer> players = new ArrayList<>();
@@ -113,4 +124,5 @@ public interface QuestParty
     {
         getOnlinePlayers(server).forEach(message::sendTo);
     }
+
 }

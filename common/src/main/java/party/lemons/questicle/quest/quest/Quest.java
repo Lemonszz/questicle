@@ -9,6 +9,7 @@ import party.lemons.questicle.party.QuestParty;
 import party.lemons.questicle.party.storage.PartyStorage;
 import party.lemons.questicle.quest.Quests;
 import party.lemons.questicle.quest.goal.Goal;
+import party.lemons.questicle.quest.goal.impl.LocationGoal;
 import party.lemons.questicle.quest.icon.QuestIcon;
 import party.lemons.questicle.quest.quest.storage.QuestStorage;
 import party.lemons.questicle.quest.reward.Reward;
@@ -123,10 +124,26 @@ public interface Quest
         }
     }
 
+    default void checkLocation(QuestParty questParty, PartyStorage storage, LocationGoal.LocationContext ctx)
+    {
+        QuestStorage questStorage = storage.getQuestProgress(this);
+        for(Goal goal : goals())
+        {
+            if(!questStorage.isGoalComplete(goal)) {
+                if(goal.checkLocation(this, questStorage, ctx))
+                {
+                    if(questStorage.setGoalComplete(goal))
+                        storage.onQuestComplete(this);
+                }
+            }
+        }
+    }
+
     default void giveRewards(ServerPlayer pl){
         for(Reward reward : rewards())
         {
             reward.awardTo(pl);
         }
     }
+
 }

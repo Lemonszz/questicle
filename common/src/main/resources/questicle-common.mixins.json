@@ -7,7 +7,8 @@
   ],
   "mixins": [
     "goal.InventoryChangeTriggerMixin",
-    "goal.ChangeDimensionTriggerMixin"
+    "goal.ChangeDimensionTriggerMixin",
+    "goal.ServerPlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

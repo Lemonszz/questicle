@@ -9,6 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import party.lemons.questicle.party.PartyManager;
 import party.lemons.questicle.party.QuestParty;
+import party.lemons.questicle.quest.goal.impl.LocationGoal;
 
 public class GoalTracker
 {
@@ -38,5 +39,15 @@ public class GoalTracker
         QuestParty party = PartyManager.getPlayerParty(player);
         if(party != null)
             party.onDimensionChanged(player, location);
+    }
+
+    public static void checkLocation(ServerPlayer player)
+    {
+        QuestParty party = PartyManager.getPlayerParty(player);
+        if(party != null) {
+            LocationGoal.LocationContext ctx = LocationGoal.LocationContext.create(player);
+
+            party.checkLocation(ctx);
+        }
     }
 }

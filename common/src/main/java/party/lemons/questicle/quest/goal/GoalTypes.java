@@ -18,6 +18,7 @@ import party.lemons.questicle.QuesticleClient;
 import party.lemons.questicle.quest.goal.impl.ChangeDimensionGoal;
 import party.lemons.questicle.quest.goal.impl.CollectGoal;
 import party.lemons.questicle.quest.goal.impl.KillMobGoal;
+import party.lemons.questicle.quest.goal.impl.LocationGoal;
 
 import java.util.Optional;
 
@@ -30,6 +31,7 @@ public class GoalTypes
     public static final RegistrySupplier<GoalType<CollectGoal>> COLLECT_GOAL = GOAL_TYPES.register(Questicle.id("collect"), ()-> new GoalType<>(CollectGoal.CODEC));
     public static final RegistrySupplier<GoalType<KillMobGoal>> KILL_MOB = GOAL_TYPES.register(Questicle.id("kill_mob"), ()-> new GoalType<>(KillMobGoal.CODEC));
     public static final RegistrySupplier<GoalType<ChangeDimensionGoal>> CHANGE_DIMENSION = GOAL_TYPES.register(Questicle.id("change_dimension"), ()-> new GoalType<>(ChangeDimensionGoal.CODEC));
+    public static final RegistrySupplier<GoalType<LocationGoal>> LOCATION = GOAL_TYPES.register(Questicle.id("location"), ()-> new GoalType<>(LocationGoal.CODEC));
 
     public static void init(){
         GOAL_TYPES.register();

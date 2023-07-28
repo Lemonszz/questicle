@@ -11,7 +11,7 @@ import party.lemons.questicle.client.icon.*;
 import party.lemons.questicle.client.reward.ItemRewardDisplay;
 import party.lemons.questicle.client.reward.RewardDisplayRegistry;
 import party.lemons.questicle.client.reward.XpRewardDisplay;
-import party.lemons.questicle.client.tooltip.goal.ChangeDimensionGoalDisplay;
+import party.lemons.questicle.client.tooltip.goal.*;
 import party.lemons.questicle.client.tooltip.quest.StandardQuestTooltip;
 import party.lemons.questicle.client.tooltip.TooltipRegistry;
 import party.lemons.questicle.client.frame.PresetFrameLoader;
@@ -19,9 +19,6 @@ import party.lemons.questicle.client.frame.PresetFrameRenderer;
 import party.lemons.questicle.client.frame.TextureFrameRenderer;
 import party.lemons.questicle.client.gui.QuestScreen;
 import party.lemons.questicle.client.shader.QShaders;
-import party.lemons.questicle.client.tooltip.goal.CollectGoalDisplay;
-import party.lemons.questicle.client.tooltip.goal.GoalDisplayRegistry;
-import party.lemons.questicle.client.tooltip.goal.KillMobDisplayGoal;
 import party.lemons.questicle.client.widget.NineSliceWidgetRenderer;
 import party.lemons.questicle.client.widget.RepeatingTextureWidgetRenderer;
 import party.lemons.questicle.client.widget.WidgetRenderers;
@@ -95,6 +92,7 @@ public class QuesticleClient
         GoalDisplayRegistry.register(GoalTypes.COLLECT_GOAL.get(), new CollectGoalDisplay());
         GoalDisplayRegistry.register(GoalTypes.KILL_MOB.get(), new KillMobDisplayGoal());
         GoalDisplayRegistry.register(GoalTypes.CHANGE_DIMENSION.get(), new ChangeDimensionGoalDisplay());
+        GoalDisplayRegistry.register(GoalTypes.LOCATION.get(), new LocationGoalDisplay());
     }
 
     public static void initRewardRenderers()

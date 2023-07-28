@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import party.lemons.questicle.client.texture.TextureData;
 import party.lemons.questicle.party.QuestParty;
+import party.lemons.questicle.quest.goal.impl.LocationGoal;
 import party.lemons.questicle.quest.quest.Quest;
 import party.lemons.questicle.quest.quest.storage.QuestStorage;
 
@@ -65,4 +66,8 @@ public abstract class Goal
         return false;
     }
 
+    public boolean checkLocation(Quest quest, QuestStorage questStorage, LocationGoal.LocationContext ctx)
+    {
+        return false;
+    }
 }
