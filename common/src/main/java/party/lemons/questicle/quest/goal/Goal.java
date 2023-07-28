@@ -18,6 +18,7 @@ public abstract class Goal
     protected static <P extends Goal> Products.P1<RecordCodecBuilder.Mu<P>, String> baseCodec(RecordCodecBuilder.Instance<P> instance) {
         return instance.group(
                 Codec.STRING.fieldOf("id").forGetter(Goal::id)
+
         );
     }
     private final String id;

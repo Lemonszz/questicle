@@ -424,7 +424,6 @@ public class QuestScreen extends Screen
         {
             frameRenderer.renderRewardPending(g, display.frame(), drawX, drawY, delta, hover);
         }
-
     }
 
     //TODO: these could be precalculated on move/zoom
