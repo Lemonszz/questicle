@@ -1,4 +1,4 @@
-package party.lemons.questicle.client.widget;
+package party.lemons.questicle.client.gui.widget.button;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

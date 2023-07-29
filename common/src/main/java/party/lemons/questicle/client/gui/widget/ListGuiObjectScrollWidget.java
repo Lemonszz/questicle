@@ -1,4 +1,4 @@
-package party.lemons.questicle.client.widget;
+package party.lemons.questicle.client.gui.widget;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.gui.GuiGraphics;

@@ -1,4 +1,4 @@
-package party.lemons.questicle.client.widget;
+package party.lemons.questicle.client.gui.widget;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.gui.GuiGraphics;
@@ -12,6 +12,7 @@ import party.lemons.questicle.client.gui.ClickableObject;
 import party.lemons.questicle.client.gui.GuiObject;
 import party.lemons.questicle.client.gui.QComponents;
 import party.lemons.questicle.client.gui.renderable.StandardTexture;
+import party.lemons.questicle.client.widget.TooltipProvider;
 import party.lemons.questicle.util.QMath;
 
 public class GuiObjectScrollWidget<T> extends AbstractScrollWidget implements TooltipProvider

@@ -1,9 +1,6 @@
-package party.lemons.questicle.client.widget;
+package party.lemons.questicle.client.gui.widget.button;
 
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.AbstractButton;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.network.chat.Component;
 import party.lemons.questicle.client.gui.renderable.RenderComponent;
 
 public class IconButton extends QButton {

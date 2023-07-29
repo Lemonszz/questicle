@@ -1,4 +1,4 @@
-package party.lemons.questicle.client.widget;
+package party.lemons.questicle.client.gui;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -8,6 +8,7 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 import party.lemons.questicle.client.gui.GuiObject;
+import party.lemons.questicle.client.widget.TooltipProvider;
 
 public class GuiObjectWidget<T> extends AbstractWidget implements TooltipProvider
 {
