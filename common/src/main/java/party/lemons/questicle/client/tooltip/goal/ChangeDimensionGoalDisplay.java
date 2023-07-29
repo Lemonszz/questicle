@@ -7,7 +7,6 @@ import net.minecraft.network.chat.Component;
 import org.joml.Vector2i;
 import party.lemons.questicle.client.DrawUtils;
 import party.lemons.questicle.client.gui.QComponents;
-import party.lemons.questicle.client.texture.TextureData;
 import party.lemons.questicle.quest.goal.impl.ChangeDimensionGoal;
 
 public class ChangeDimensionGoalDisplay implements GoalDisplay<ChangeDimensionGoal>
@@ -37,6 +36,6 @@ public class ChangeDimensionGoalDisplay implements GoalDisplay<ChangeDimensionGo
 
     public Component getText(GoalDisplayContext<ChangeDimensionGoal> context)
     {
-        return context.goal().getHoverTooltip(context.questStorage());
+        return context.goal().getHoverTooltip(context.questStorage(), Minecraft.getInstance().level);
     }
 }

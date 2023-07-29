@@ -38,6 +38,6 @@ public class LocationGoalDisplay implements GoalDisplay<LocationGoal>
 
     public Component getText(GoalDisplayContext<LocationGoal> context)
     {
-        return context.goal().getHoverTooltip(context.questStorage());
+        return context.goal().getHoverTooltip(context.questStorage(), Minecraft.getInstance().level);
     }
 }

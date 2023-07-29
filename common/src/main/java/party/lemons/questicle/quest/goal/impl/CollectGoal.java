@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import party.lemons.questicle.client.texture.TextureData;
 import party.lemons.questicle.party.QuestParty;
 import party.lemons.questicle.quest.goal.Goal;
@@ -81,7 +82,7 @@ public class CollectGoal extends Goal implements InventoryCountGoal
     }
 
     @Override
-    public Component getHoverTooltip(QuestStorage questStorage) {
+    public Component getHoverTooltip(QuestStorage questStorage, Level level) {
         return Component.translatable(isTag ? "questicle.goal.collect.tag" : "questicle.goal.collect.item", getRequiredCount(), isTag ? "#" + checkTag.location() : checkItem.getDefaultInstance().getDisplayName());
     }
 

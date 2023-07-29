@@ -3,7 +3,6 @@ package party.lemons.questicle.quest.goal.impl;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -12,6 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
 import party.lemons.questicle.client.texture.TextureData;
 import party.lemons.questicle.party.QuestParty;
 import party.lemons.questicle.quest.goal.Goal;
@@ -74,8 +74,8 @@ public class KillMobGoal extends Goal
     }
 
     @Override
-    public Component getHoverTooltip(QuestStorage questStorage) {
-        return Component.translatable(isTag ? "questicle.goal.kill_mob.tag" : "questicle.goal.kill_mob.mob", targetAmount(), isTag ? "#" + targetTag.location() : targetMob.create(Minecraft.getInstance().level).getDisplayName());
+    public Component getHoverTooltip(QuestStorage questStorage, Level level) {
+        return Component.translatable(isTag ? "questicle.goal.kill_mob.tag" : "questicle.goal.kill_mob.mob", targetAmount(), isTag ? "#" + targetTag.location() : targetMob.create(level).getDisplayName());
     }
 
     public boolean targetMatches(EntityType<?> type)

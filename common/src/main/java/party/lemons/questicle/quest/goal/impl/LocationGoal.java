@@ -4,7 +4,6 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -15,7 +14,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
-import org.jetbrains.annotations.Nullable;
 import party.lemons.questicle.client.texture.TextureData;
 import party.lemons.questicle.quest.goal.Goal;
 import party.lemons.questicle.quest.goal.GoalType;
@@ -63,7 +61,7 @@ public class LocationGoal extends Goal
     }
 
     @Override
-    public Component getHoverTooltip(QuestStorage questStorage) {
+    public Component getHoverTooltip(QuestStorage questStorage, Level level) {
         return Component.translatable(displayText());
     }
 
