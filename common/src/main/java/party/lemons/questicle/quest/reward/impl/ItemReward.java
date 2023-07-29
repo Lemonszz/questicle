@@ -8,6 +8,7 @@ import party.lemons.questicle.quest.reward.Reward;
 import party.lemons.questicle.quest.reward.RewardType;
 import party.lemons.questicle.quest.reward.RewardTypes;
 import party.lemons.questicle.util.QCodecs;
+import party.lemons.questicle.util.QUtil;
 
 import java.util.List;
 
@@ -27,6 +28,6 @@ public record ItemReward(List<ItemStack> itemStacks) implements Reward
     @Override
     public void awardTo(ServerPlayer player) {
         for(ItemStack stack : itemStacks())
-            player.getInventory().add(stack.copy());
+            QUtil.giveOrDrop(player, stack);
     }
 }

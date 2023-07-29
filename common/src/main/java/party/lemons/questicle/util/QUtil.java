@@ -4,7 +4,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -42,5 +44,11 @@ public class QUtil
         }
 
         return structureList;
+    }
+
+    public static void giveOrDrop(ServerPlayer player, ItemStack stack)
+    {
+        if(!player.addItem(stack))
+            player.drop(stack, false);
     }
 }
