@@ -28,9 +28,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class DrawUtils
-{
-    public static int DEFAULT_STRING_HEIGHT = Minecraft.getInstance().font.lineHeight;
-    public static float MOB_DOWNSCALE_SIZE = 4;
+{ public static float MOB_DOWNSCALE_SIZE = 4;
     public static int MOB_DOWNSCALE_AMOUNT = 3;
 
     private static void executeRenderCall(RenderCall renderCall)
@@ -43,6 +41,11 @@ public class DrawUtils
         {
             RenderSystem.recordRenderCall(renderCall);
         }
+    }
+
+    public static int fontLineHeight()
+    {
+        return Minecraft.getInstance().font.lineHeight;
     }
 
     public static void drawLine(GuiGraphics graphics, int startX, int startY, int endX, int endY, int width)

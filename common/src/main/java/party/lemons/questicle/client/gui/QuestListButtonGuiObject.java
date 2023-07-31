@@ -3,6 +3,7 @@ package party.lemons.questicle.client.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import party.lemons.questicle.client.ClientConfig;
 import party.lemons.questicle.client.gui.renderable.RenderComponent;
 import party.lemons.questicle.client.icon.IconRenderer;
 import party.lemons.questicle.client.icon.IconRenderers;
@@ -45,7 +46,7 @@ public class QuestListButtonGuiObject implements GuiObject<QuestListButtonGuiObj
             iconRenderer.render(graphics, drawX + 3, iconY,iconCtx, mouseX, mouseY, delta);
             iconWidth = iconRenderer.getWidth(iconCtx);
         }
-        graphics.drawString(Minecraft.getInstance().font, Component.translatable(context.list().name()), drawX + 4 + iconWidth, drawY + (height / 2) - (Minecraft.getInstance().font.lineHeight / 2), 0xFFFFFF);
+        graphics.drawString(Minecraft.getInstance().font, ClientConfig.applyQuestFont(Component.translatable(context.list().name())), drawX + 4 + iconWidth, drawY + (height / 2) - (Minecraft.getInstance().font.lineHeight / 2), 0xFFFFFF);
 
 
     }

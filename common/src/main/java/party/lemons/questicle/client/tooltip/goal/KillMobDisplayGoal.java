@@ -14,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.joml.Vector2i;
 import party.lemons.questicle.QuesticleClient;
+import party.lemons.questicle.client.ClientConfig;
 import party.lemons.questicle.client.DrawUtils;
 import party.lemons.questicle.quest.goal.impl.KillMobGoal;
 import party.lemons.questicle.quest.quest.storage.QuestStorage;
@@ -32,7 +33,7 @@ public class KillMobDisplayGoal implements GoalDisplay<KillMobGoal>
         }
 
         Component text = getText(context);
-        graphics.drawString(Minecraft.getInstance().font, text, drawX + 18, drawY + (DrawUtils.DEFAULT_STRING_HEIGHT / 2), 0xFFFFFF);
+        graphics.drawString(Minecraft.getInstance().font, text, drawX + 18, drawY + (DrawUtils.fontLineHeight() / 2), 0xFFFFFF);
     }
 
     @Override
@@ -56,7 +57,7 @@ public class KillMobDisplayGoal implements GoalDisplay<KillMobGoal>
         if(maxCount == currentCount)
             component = component.withStyle(ChatFormatting.STRIKETHROUGH);
 
-        return component;
+        return ClientConfig.applyQuestFont(component);
     }
 
 

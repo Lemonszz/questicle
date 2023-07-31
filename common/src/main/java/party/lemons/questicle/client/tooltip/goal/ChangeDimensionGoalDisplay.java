@@ -4,7 +4,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import org.joml.Vector2i;
+import party.lemons.questicle.client.ClientConfig;
 import party.lemons.questicle.client.DrawUtils;
 import party.lemons.questicle.client.gui.QComponents;
 import party.lemons.questicle.quest.goal.impl.ChangeDimensionGoal;
@@ -19,7 +21,7 @@ public class ChangeDimensionGoalDisplay implements GoalDisplay<ChangeDimensionGo
             QComponents.ICON_NETHER_PORTAL.render(graphics, drawX, drawY, 16, 16);
         }
         Component text = getText(context);
-        graphics.drawString(Minecraft.getInstance().font, text, drawX + 18, drawY + (DrawUtils.DEFAULT_STRING_HEIGHT / 2), 0xFFFFFF);
+        graphics.drawString(Minecraft.getInstance().font, text, drawX + 18, drawY + (DrawUtils.fontLineHeight() / 2), 0xFFFFFF);
     }
 
     @Override
@@ -34,8 +36,8 @@ public class ChangeDimensionGoalDisplay implements GoalDisplay<ChangeDimensionGo
     }
 
 
-    public Component getText(GoalDisplayContext<ChangeDimensionGoal> context)
+    public MutableComponent getText(GoalDisplayContext<ChangeDimensionGoal> context)
     {
-        return context.goal().getHoverTooltip(context.questStorage(), Minecraft.getInstance().level);
+        return ClientConfig.applyQuestFont(context.goal().getHoverTooltip(context.questStorage(), Minecraft.getInstance().level));
     }
 }

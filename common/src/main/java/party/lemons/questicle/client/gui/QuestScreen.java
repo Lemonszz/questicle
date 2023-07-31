@@ -8,8 +8,10 @@ import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import party.lemons.questicle.client.ClientConfig;
 import party.lemons.questicle.client.ClientStorage;
 import party.lemons.questicle.client.DrawUtils;
 import party.lemons.questicle.client.frame.FrameRenderer;
@@ -163,9 +165,9 @@ public class QuestScreen extends Screen
             int goalsHeight = (int) (remainingHeight * 0.43F);
 
 
-            Component description = Component.translatableWithFallback(displayQuest.description(), displayQuest.description());
+            MutableComponent description = ClientConfig.applyQuestFont(Component.translatableWithFallback(displayQuest.description(), displayQuest.description()));
             int wrapWidth = displayWidth - 7;
-            WrappedStringGuiObject.StringContext descContext = new WrappedStringGuiObject.StringContext(description, wrapWidth- 8, 0xFFFFFF);
+            WrappedStringGuiObject.StringContext descContext = new WrappedStringGuiObject.StringContext(description, wrapWidth- 8, 0xFFFFFF, Minecraft.getInstance().font);
             GuiObjectScrollWidget<WrappedStringGuiObject.StringContext> descriptionWidget = addRenderableWidget(new GuiObjectScrollWidget<>(displayX + 5, displayY + 45, wrapWidth, descriptionHeight, new WrappedStringGuiObject(), descContext));
 
             int goalY = displayY + 45 + Math.min(descriptionWidget.getHeight(), descriptionWidget.getInnerHeight()) + 5;
@@ -277,7 +279,7 @@ public class QuestScreen extends Screen
         int startX =  (scrollX % TILE_TEXTURE_SIZE);
         int startY = (scrollY % TILE_TEXTURE_SIZE);
 
-        g.drawString(minecraft.font, minecraft.fpsString.split(" ")[0], questsX + 10, questsY + 10, 0xFFFFFF);
+        g.drawString(Minecraft.getInstance().font, minecraft.fpsString.split(" ")[0], questsX + 10, questsY + 10, 0xFFFFFF);
 
         DrawUtils.blitRepeating(g, backgroundTexture,
                 -TILE_TEXTURE_SIZE + questsX + startX,
@@ -314,10 +316,10 @@ public class QuestScreen extends Screen
         NineSliceTexture titleBGTexture = QComponents.PANEL_BLUE_SQUARE;
         titleBGTexture.render(g, displayX, displayY + 19, displayWidth, 17);
 
-        Component title = Component.translatable(displayQuest.displayName());
+        Component title = ClientConfig.applyQuestFont(Component.translatable(displayQuest.displayName()));
         renderDisplayAt(g, sidebarList.getOrNull(displayQuest), displayX + 4, displayY + 15, mouseX, mouseY, delta, false, false);
 
-        g.drawString(font, title, displayX + 30, displayY + 23, 0xFFFFFF);  //TODO: scrolling string
+        g.drawString(Minecraft.getInstance().font, title, displayX + 30, displayY + 23, 0xFFFFFF);  //TODO: scrolling string
     }
 
     private void renderWidgets(List<Widget> widgets, GuiGraphics g, int mouseX, int mouseY, float delta)

@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 import org.joml.Vector2i;
+import party.lemons.questicle.client.ClientConfig;
 import party.lemons.questicle.client.DrawUtils;
 import party.lemons.questicle.client.gui.QComponents;
 import party.lemons.questicle.client.tooltip.ItemStackTooltip;
@@ -32,7 +33,7 @@ public class CollectGoalDisplay implements GoalDisplay<CollectGoal>
         }
 
         Component text = getText(context);
-        graphics.drawString(Minecraft.getInstance().font, text, drawX + 18, drawY + (DrawUtils.DEFAULT_STRING_HEIGHT / 2), 0xFFFFFF);
+        graphics.drawString(Minecraft.getInstance().font, text, drawX + 18, drawY + (DrawUtils.fontLineHeight() / 2), 0xFFFFFF);
     }
 
     @Override
@@ -68,6 +69,6 @@ public class CollectGoalDisplay implements GoalDisplay<CollectGoal>
         if(maxCount == currentCount)
             component = component.withStyle(ChatFormatting.STRIKETHROUGH);
 
-        return component;
+        return ClientConfig.applyQuestFont(component);
     }
 }

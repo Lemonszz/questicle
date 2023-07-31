@@ -7,6 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -74,7 +75,7 @@ public class KillMobGoal extends Goal
     }
 
     @Override
-    public Component getHoverTooltip(QuestStorage questStorage, Level level) {
+    public MutableComponent getHoverTooltip(QuestStorage questStorage, Level level) {
         return Component.translatable(isTag ? "questicle.goal.kill_mob.tag" : "questicle.goal.kill_mob.mob", targetAmount(), isTag ? "#" + targetTag.location() : targetMob.create(level).getDisplayName());
     }
 

@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -61,7 +62,7 @@ public class LocationGoal extends Goal
     }
 
     @Override
-    public Component getHoverTooltip(QuestStorage questStorage, Level level) {
+    public MutableComponent getHoverTooltip(QuestStorage questStorage, Level level) {
         return Component.translatable(displayText());
     }
 

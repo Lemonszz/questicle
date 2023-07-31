@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import org.joml.Vector2i;
+import party.lemons.questicle.client.ClientConfig;
 import party.lemons.questicle.client.ClientStorage;
 import party.lemons.questicle.client.DrawUtils;
 import party.lemons.questicle.client.gui.QComponents;
@@ -41,10 +42,10 @@ public class StandardQuestTooltip extends QuestTooltip<StandardQuest>
             default -> titleBackground = QComponents.PANEL_BLACK_SQUARE;
         }
 
-        Component title = Component.translatableWithFallback(quest.displayName(), quest.displayName());
+        Component title = ClientConfig.applyQuestFont(Component.translatableWithFallback(quest.displayName(), quest.displayName()));
 
         int lineCount = 1 + quest.goals().size();
-        int sizeY = DrawUtils.DEFAULT_STRING_HEIGHT + (titleBackground.borderY() * 2) + 2;
+        int sizeY = DrawUtils.fontLineHeight() + (titleBackground.borderY() * 2) + 2;
         int titleWidth = font.width(title) + (background.borderX() * 2);
 
         Vector2i goalsSize = getGoalsSize(quest, background);
@@ -68,7 +69,7 @@ public class StandardQuestTooltip extends QuestTooltip<StandardQuest>
         //Title
         drawTextWithBorder(title, titleBackground, graphics, drawX, drawY, font, TITLE_COLOR, sizeX);
 
-        drawY += DrawUtils.DEFAULT_STRING_HEIGHT * 2;
+        drawY += DrawUtils.fontLineHeight() * 2;
 
         QuestStorage storage = ClientStorage.clientParty.getStorage().getQuestProgress(quest);
         for(Goal goal : quest.goals())
@@ -111,7 +112,7 @@ public class StandardQuestTooltip extends QuestTooltip<StandardQuest>
         int borderX = border.borderX() + 1;
 
         int titleWidth = font.width(text);
-        border.render(graphics, drawX, drawY, widthOverride == -1  ? titleWidth  + (borderY * 2) : widthOverride, DrawUtils.DEFAULT_STRING_HEIGHT + (borderX * 2));
+        border.render(graphics, drawX, drawY, widthOverride == -1  ? titleWidth  + (borderY * 2) : widthOverride, DrawUtils.fontLineHeight() + (borderX * 2));
         graphics.drawString(font, text, drawX + border.borderX() + 1, drawY + border.borderY() + 1, color);
     }
 }

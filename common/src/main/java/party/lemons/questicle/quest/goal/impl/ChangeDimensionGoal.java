@@ -3,6 +3,7 @@ package party.lemons.questicle.quest.goal.impl;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
@@ -50,7 +51,7 @@ public class ChangeDimensionGoal extends Goal {
     }
 
     @Override
-    public Component getHoverTooltip(QuestStorage questStorage, Level level) {
+    public MutableComponent getHoverTooltip(QuestStorage questStorage, Level level) {
         String dimensionName = QUtil.titleCase(targetDimension.getPath().replace("_", " ")); //Best guess dimension name? TODO: Maybe just use this as fallback. lang strings for vanilla dimensions. Is there a common format for modded?
         return Component.translatable("questicle.goal.change_dimension", dimensionName);
     }
