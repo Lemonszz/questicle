@@ -54,13 +54,13 @@ public class PartyStorage
     {
         this.party = PartyManager.getParty(partyID);
         this.questProgress.putAll(questProgress);
-        refreshActiveQuests();
+        refreshActive = true;
     }
 
     public PartyStorage(QuestParty party)
     {
         this.party = party;
-        refreshActiveQuests();
+        refreshActive = true;
     }
 
     public QuestStorage getQuestProgress(Quest quest)
@@ -138,7 +138,7 @@ public class PartyStorage
         if(!dirty && !force)
             return;
 
-        party.sendMessage(new S2cSyncParty(getParty()), server);
+        party.sendMessage(new S2cSyncParty(getParty()));
 
         dirty = false;
         Gson gson = new GsonBuilder().setLenient().setPrettyPrinting().create();
@@ -197,6 +197,11 @@ public class PartyStorage
 
     private void refreshActiveQuests()
     {
+        refreshActiveQuests(true);
+    }
+
+    private void refreshActiveQuests(boolean checkParents)
+    {
         activeQuests.clear();
 
         for(Quest quest : Quests.quests.values())
@@ -205,8 +210,12 @@ public class PartyStorage
             if(storage.isCompleted())
                 continue;
 
-            if(quest.isQuestAvailable(this))
+            if(quest.isQuestAvailable(this)) {
                 activeQuests.add(quest);
+
+                if(checkParents)
+                    quest.onMadeAvailable(getParty());
+            }
         }
     }
 

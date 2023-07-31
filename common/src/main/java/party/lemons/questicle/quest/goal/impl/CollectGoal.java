@@ -7,6 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -75,10 +76,21 @@ public class CollectGoal extends Goal implements InventoryCountGoal
                 return false;
         }
 
-        int num = NBTUtil.setInt(TAG_LAST_COUNT, getCount(party.getOnlinePlayers(player.getServer())), storage.getProgress(this));
+        return checkPartyCount(party, storage);
+    }
+
+    private boolean checkPartyCount(QuestParty party, QuestStorage questStorage)
+    {
+        int num = NBTUtil.setInt(TAG_LAST_COUNT, getCount(party.getOnlinePlayers()), questStorage.getProgress(this));
         party.getStorage().markDirty();
 
         return num >= getRequiredCount();
+    }
+
+    @Override
+    public boolean onMadeAvailable(QuestParty party, QuestStorage questStorage)
+    {
+        return checkPartyCount(party, questStorage);
     }
 
     @Override

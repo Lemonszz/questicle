@@ -70,6 +70,7 @@ public class PartyManager
         //If reached here, player has no party, so create a blank one.
         //TODO: strategy for alternate party systems.
         QuestParty newParty = new QuesticleParty(player.getServer(), UUID.randomUUID(), player.getUUID());
+        newParty.setServer(player.getServer());
 
         PARTIES.put(newParty.partyID(), newParty);
         PLAYER_PARTIES.put(player.getUUID(), newParty);
@@ -153,6 +154,7 @@ public class PartyManager
             for(QuestParty party : parties) {
                 PARTIES.put(party.partyID(), party);
                 party.setStorage(PartyStorage.load(party, server));
+                party.setServer(server);
             }
 
             LOGGER.info("Loaded {} Questicle parties", PARTIES.size());

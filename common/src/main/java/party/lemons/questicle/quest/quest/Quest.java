@@ -1,6 +1,7 @@
 package party.lemons.questicle.quest.quest;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +14,6 @@ import party.lemons.questicle.quest.goal.impl.LocationGoal;
 import party.lemons.questicle.quest.icon.QuestIcon;
 import party.lemons.questicle.quest.quest.storage.QuestStorage;
 import party.lemons.questicle.quest.reward.Reward;
-import party.lemons.questicle.quest.reward.RewardType;
 
 import java.util.List;
 
@@ -50,6 +50,23 @@ public interface Quest
         }
 
         return true;
+    }
+
+    public default void onMadeAvailable(QuestParty party)
+    {
+        QuestStorage questStorage = party.getStorage().getQuestProgress(this);
+
+        for(Goal goal : goals())
+        {
+            if(!questStorage.isGoalComplete(goal)) {
+                if(goal.onMadeAvailable(party, questStorage))
+                {
+                    if(questStorage.setGoalComplete(goal)) {
+                        party.getStorage().onQuestComplete(this);
+                    }
+                }
+            }
+        }
     }
 
     default QuestStatus getQuestStatus(PartyStorage storage)

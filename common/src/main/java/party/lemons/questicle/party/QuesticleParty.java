@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.architectury.platform.Platform;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.server.MinecraftServer;
+import org.jetbrains.annotations.Nullable;
 import party.lemons.questicle.party.storage.PartyStorage;
 import party.lemons.questicle.quest.quest.Quest;
 
@@ -29,6 +30,8 @@ public class QuesticleParty implements QuestParty
 
     private PartyStorage storage;
 
+    @Nullable private MinecraftServer server;
+
     public QuesticleParty(UUID partyID, List<UUID> members, UUID owner)
     {
         this.members = new HashSet<>(members);
@@ -46,6 +49,16 @@ public class QuesticleParty implements QuestParty
     public void setStorage(PartyStorage storage)
     {
         this.storage = storage;
+    }
+
+    @Override
+    public void setServer(@Nullable MinecraftServer server) {
+        this.server = server;
+    }
+
+    @Override
+    public @Nullable MinecraftServer getServer() {
+        return server;
     }
 
     @Override

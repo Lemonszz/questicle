@@ -6,6 +6,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 import party.lemons.questicle.network.S2cSyncParty;
 import party.lemons.questicle.party.storage.PartyStorage;
 import party.lemons.questicle.quest.goal.impl.LocationGoal;
@@ -33,6 +34,8 @@ public interface QuestParty
 
     PartyStorage getStorage();
     void setStorage(PartyStorage storage);
+    void setServer(@Nullable MinecraftServer server);   //TODO: why is server set later? Can just be null on client?
+    @Nullable MinecraftServer getServer();
 
     default boolean addMember(UUID player)
     {
@@ -107,12 +110,12 @@ public interface QuestParty
         }
     }
 
-    default List<ServerPlayer> getOnlinePlayers(MinecraftServer server)
+    default List<ServerPlayer> getOnlinePlayers()
     {
         List<ServerPlayer> players = new ArrayList<>();
         for(UUID playerID : partyMemberList())
         {
-            ServerPlayer player = server.getPlayerList().getPlayer(playerID);
+            ServerPlayer player = getServer().getPlayerList().getPlayer(playerID);
             if(player != null)
                 players.add(player);
         }
@@ -120,9 +123,8 @@ public interface QuestParty
         return players;
     }
 
-    default void sendMessage(BaseS2CMessage message, MinecraftServer server)
+    default void sendMessage(BaseS2CMessage message)
     {
-        getOnlinePlayers(server).forEach(message::sendTo);
+        getOnlinePlayers().forEach(message::sendTo);
     }
-
 }
