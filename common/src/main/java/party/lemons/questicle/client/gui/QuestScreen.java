@@ -293,6 +293,7 @@ public class QuestScreen extends Screen
         g.pose().pushPose();
         g.pose().scale(zoom, zoom, zoom);
 
+
         renderWidgets(displayList.backgroundWidgets(), g, mouseX, mouseY, delta);
 
         renderQuestConnections(g);

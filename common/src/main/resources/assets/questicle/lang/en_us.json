@@ -21,6 +21,7 @@
   "questicle.goal.change_dimension": "Enter %s",
   "questicle.text.reward.xp": "Grant %s experience",
   "questicle.text.reward.xp.levels": "Grant %s levels",
+  "questicle.text.reward.loottable": "Roll on %s loot table",
 
   "questicle.test": "Test Quest 1",
   "questicle.test.desc": "This is a test description for the first test quest. It is fairly long so you could provide instructions to players. It should be long enough for the scroll wheel to appear. This is another line of text",

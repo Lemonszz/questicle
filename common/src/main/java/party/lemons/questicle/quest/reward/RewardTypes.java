@@ -16,6 +16,7 @@ import net.minecraft.util.ExtraCodecs;
 import party.lemons.questicle.Questicle;
 import party.lemons.questicle.QuesticleClient;
 import party.lemons.questicle.quest.reward.impl.ItemReward;
+import party.lemons.questicle.quest.reward.impl.LootTableReward;
 import party.lemons.questicle.quest.reward.impl.XpReward;
 
 import java.util.Optional;
@@ -28,6 +29,7 @@ public class RewardTypes
 
     public static final RegistrySupplier<RewardType<ItemReward>> ITEM = REWARD_TYPES.register(Questicle.id("item"), ()-> new RewardType<>(ItemReward.CODEC));
     public static final RegistrySupplier<RewardType<XpReward>> XP = REWARD_TYPES.register(Questicle.id("xp"), ()-> new RewardType<>(XpReward.CODEC));
+    public static final RegistrySupplier<RewardType<LootTableReward>> LOOT_TABLE = REWARD_TYPES.register(Questicle.id("loot_table"), ()-> new RewardType<>(LootTableReward.CODEC));
 
     public static void init(){
         REWARD_TYPES.register();

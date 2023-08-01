@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import party.lemons.questicle.client.icon.*;
 import party.lemons.questicle.client.reward.ItemRewardDisplay;
+import party.lemons.questicle.client.reward.LootTableRewardDisplay;
 import party.lemons.questicle.client.reward.RewardDisplayRegistry;
 import party.lemons.questicle.client.reward.XpRewardDisplay;
 import party.lemons.questicle.client.tooltip.goal.*;
@@ -99,5 +100,6 @@ public class QuesticleClient
     {
         RewardDisplayRegistry.register(RewardTypes.ITEM.get(), new ItemRewardDisplay());
         RewardDisplayRegistry.register(RewardTypes.XP.get(), new XpRewardDisplay());
+        RewardDisplayRegistry.register(RewardTypes.LOOT_TABLE.get(), new LootTableRewardDisplay());
     }
 }

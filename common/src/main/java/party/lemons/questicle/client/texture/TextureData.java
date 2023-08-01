@@ -19,6 +19,8 @@ public record TextureData(ResourceLocation texture, int x, int y, int width, int
             .put(Questicle.id("nether_fortress"), new TextureData(BUILTIN_TEXTURE, 0, 0, 92, 92, 512, 512))
             .put(Questicle.id("nether_portal"), new TextureData(BUILTIN_TEXTURE, 93, 0, 92, 92, 512, 512))
             .put(Questicle.id("wither"), new TextureData(BUILTIN_TEXTURE, 186, 0, 92, 92, 512, 512))
+            .put(Questicle.id("end_portal"), new TextureData(BUILTIN_TEXTURE, 279, 0, 92, 92, 512, 512))
+            .put(Questicle.id("end_portal_active"), new TextureData(BUILTIN_TEXTURE, 372, 0, 92, 92, 512, 512))
             .build();
 
 
