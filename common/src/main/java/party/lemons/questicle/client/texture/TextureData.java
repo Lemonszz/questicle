@@ -1,45 +1,67 @@
 package party.lemons.questicle.client.texture;
 
-import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
-import party.lemons.questicle.Questicle;
+import party.lemons.questicle.client.QAtlases;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 
-public record TextureData(ResourceLocation texture, int x, int y, int width, int height, int textureWidth, int textureHeight)
+public class TextureData
 {
-    private static final ResourceLocation BUILTIN_TEXTURE = Questicle.id("textures/builtin.png");
-    private static final TextureData UNKNOWN_TEXTURE = new TextureData(BUILTIN_TEXTURE, 496, 496, 16, 16, 256, 256);
+    //TODO: 1.20.2  - Use what Gui Sprites do
 
-    public static final Map<ResourceLocation, TextureData> BUILTIN = new ImmutableMap.Builder<ResourceLocation, TextureData>()
-            .put(Questicle.id("nether_fortress"), new TextureData(BUILTIN_TEXTURE, 0, 0, 92, 92, 512, 512))
-            .put(Questicle.id("nether_portal"), new TextureData(BUILTIN_TEXTURE, 93, 0, 92, 92, 512, 512))
-            .put(Questicle.id("wither"), new TextureData(BUILTIN_TEXTURE, 186, 0, 92, 92, 512, 512))
-            .put(Questicle.id("end_portal"), new TextureData(BUILTIN_TEXTURE, 279, 0, 92, 92, 512, 512))
-            .put(Questicle.id("end_portal_active"), new TextureData(BUILTIN_TEXTURE, 372, 0, 92, 92, 512, 512))
-            .build();
+
 
 
     public static Codec<TextureData> FULL_CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            ResourceLocation.CODEC.fieldOf("texture").forGetter(TextureData::texture),
-            Codec.INT.fieldOf("x").forGetter(TextureData::x),
-            Codec.INT.fieldOf("y").forGetter(TextureData::y),
-            Codec.INT.fieldOf("width").forGetter(TextureData::width),
-            Codec.INT.fieldOf("height").forGetter(TextureData::height),
-            Codec.INT.optionalFieldOf("texture_width", 256).forGetter(TextureData::textureWidth),
-            Codec.INT.optionalFieldOf("texture_height", 256).forGetter(TextureData::textureHeight)
+            ResourceLocation.CODEC.optionalFieldOf("atlas", QAtlases.ELEMENTS_ATLAS).forGetter(TextureData::atlas),
+            ResourceLocation.CODEC.fieldOf("texture").forGetter(TextureData::texture)
     ).apply(instance, TextureData::new));
 
-    public static Codec<TextureData> CODEC = Codec.either(
-            ResourceLocation.CODEC,
-            FULL_CODEC
-    ).xmap(
-            r->r.map(rl -> BUILTIN.getOrDefault(rl, UNKNOWN_TEXTURE), location -> location), Either::right
+    public static Codec<TextureData> CODEC = Codec.either(ResourceLocation.CODEC, FULL_CODEC).xmap(
+            either -> either.map((l)->new TextureData(QAtlases.ELEMENTS_ATLAS, l), location -> location),
+            Either::right
     );
 
+    private final ResourceLocation texture, atlas;
 
+    public TextureData(ResourceLocation atlas, ResourceLocation texture)
+    {
+        this.texture = texture;
+        this.atlas = atlas;
+    }
+
+    @Environment(EnvType.CLIENT)
+    public TextureAtlasSprite sprite()
+    {
+        return QAtlases.getAtlasSprite(this);
+    }
+
+    public ResourceLocation texture()
+    {
+        return texture;
+    }
+
+    public ResourceLocation atlas()
+    {
+        return atlas;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TextureData that = (TextureData) o;
+        return Objects.equals(texture, that.texture) && Objects.equals(atlas, that.atlas);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(texture, atlas);
+    }
 }

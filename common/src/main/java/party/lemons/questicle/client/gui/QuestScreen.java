@@ -120,7 +120,7 @@ public class QuestScreen extends Screen
         int questsRightOffset = displayQuest == null ? 5 : 150;
         int questsWidth = panelWidth - questsX - questsRightOffset;
 
-        boolean hasListList = QuestLists.lists.size() > 1;
+        boolean hasListList = sortedLists.size() > 1;
 
 
 

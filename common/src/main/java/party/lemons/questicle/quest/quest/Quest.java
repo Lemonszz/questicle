@@ -1,11 +1,14 @@
 package party.lemons.questicle.quest.quest;
 
+import dev.architectury.platform.Platform;
+import net.fabricmc.api.EnvType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import party.lemons.questicle.client.ClientStorage;
 import party.lemons.questicle.party.QuestParty;
 import party.lemons.questicle.party.storage.PartyStorage;
 import party.lemons.questicle.quest.Quests;
@@ -45,8 +48,14 @@ public interface Quest
 
         for(QuestDependency dependency : dependencies())
         {
-            if(dependency.required() && !storage.getQuestProgress(Quests.quests.get(dependency.quest())).isCompleted())
-                return false;
+            if(!dependency.required())
+                continue;
+
+            //TODO: need a centralised way of getting the quest map rather than platform checks?
+            if(Platform.getEnv() == EnvType.CLIENT)
+                return !storage.getQuestProgress(ClientStorage.clientQuests.get(dependency.quest())).isCompleted();
+
+            return !storage.getQuestProgress(Quests.quests.get(dependency.quest())).isCompleted();
         }
 
         return true;

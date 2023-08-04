@@ -26,7 +26,7 @@ public class PresetFrameLoader extends SimpleJsonResourceReloadListener
 
     public PresetFrameLoader()
     {
-        super(GSON, "quest_frames");
+        super(GSON, "quest_frame_presets");
     }
 
     protected void apply(Map<ResourceLocation, JsonElement> elements, ResourceManager resourceManager, ProfilerFiller profiler)

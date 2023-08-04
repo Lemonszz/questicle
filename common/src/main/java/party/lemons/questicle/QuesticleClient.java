@@ -7,6 +7,7 @@ import dev.architectury.registry.client.keymappings.KeyMappingRegistry;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
+import party.lemons.questicle.client.QAtlases;
 import party.lemons.questicle.client.icon.*;
 import party.lemons.questicle.client.reward.ItemRewardDisplay;
 import party.lemons.questicle.client.reward.LootTableRewardDisplay;

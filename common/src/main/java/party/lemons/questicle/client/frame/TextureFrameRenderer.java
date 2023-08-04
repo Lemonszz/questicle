@@ -1,6 +1,7 @@
 package party.lemons.questicle.client.frame;
 
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import party.lemons.questicle.client.ClientStorage;
 import party.lemons.questicle.client.texture.TextureData;
 import party.lemons.questicle.quest.display.QuestDisplay;
@@ -20,6 +21,8 @@ public class TextureFrameRenderer implements FrameRenderer<TextureQuestFrame>
             default -> def = hovered ? frame.hoverDef() : frame.standardDef(); //Available/Unknown
         }
 
-        g.blit(def.texture(), drawX, drawY, def.x(), def.y(), def.width(), def.height(), frame.textureWidth(), frame.textureHeight());
+        TextureAtlasSprite sprite = def.sprite();
+
+        g.blit(drawX, drawY, 0, sprite.contents().width(), sprite.contents().height(), sprite);
     }
 }

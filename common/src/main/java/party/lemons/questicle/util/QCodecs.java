@@ -2,15 +2,21 @@ package party.lemons.questicle.util;
 
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.Lifecycle;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.KeyDispatchCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.Util;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.joml.Vector2i;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 public class QCodecs
 {
@@ -39,4 +45,21 @@ public class QCodecs
     public static final Codec<ItemStack> SIMPLE_ITEM_STACK = Codec.either(BuiltInRegistries.ITEM.byNameCodec(), ITEM_STACK)
             .xmap(e->e.map(ItemStack::new, i->i), Either::right
     );
+
+    /*
+    public static <T> Codec<T> byNameCodec(Registrar<T> registry)
+    {
+        Codec<QuestType<?>> codec = ResourceLocation.CODEC
+                .flatXmap(
+                        resourceLocation -> Optional.ofNullable(registry.get(resourceLocation))
+                                .map(DataResult::success)
+                                .orElseGet(() -> DataResult.error(() -> "Unknown registry key in " + registry.key() + ": " + resourceLocation)),
+                        object -> registry.getKey(object)
+                                .map(ResourceKey::location)
+                                .map(DataResult::success)
+                                .orElseGet(() -> DataResult.error(() -> "Unknown registry element in " + registry.key() + ":" + object))
+                );
+        Codec<QuestType<?>> codec2 = ExtraCodecs.idResolverCodec(object -> registry.getKey(object).isPresent() ? registry.getRawId(object) : -1, registry::byRawId, -1);
+        return ExtraCodecs.overrideLifecycle(ExtraCodecs.orCompressed(codec, codec2), (e)-> Lifecycle.stable(),  (e)->Lifecycle.stable());
+    }*/
 }

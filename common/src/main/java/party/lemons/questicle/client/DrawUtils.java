@@ -10,6 +10,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.resources.TextureAtlasHolder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -28,7 +29,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class DrawUtils
-{ public static float MOB_DOWNSCALE_SIZE = 4;
+{
+    public static float MOB_DOWNSCALE_SIZE = 4;
     public static int MOB_DOWNSCALE_AMOUNT = 3;
 
     private static void executeRenderCall(RenderCall renderCall)
@@ -183,6 +185,6 @@ public class DrawUtils
 
     public static void drawTexture(GuiGraphics graphics, TextureData tex, int drawX, int drawY, int width, int height)
     {
-        graphics.blit(tex.texture(), drawX, drawY, width, height, tex.x(), tex.y(), tex.width(), tex.height(), tex.textureWidth(), tex.textureHeight());
+        graphics.blit(drawX, drawY, 0, width, height, tex.sprite());
     }
 }

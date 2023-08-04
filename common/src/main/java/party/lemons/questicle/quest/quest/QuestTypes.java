@@ -1,8 +1,10 @@
 package party.lemons.questicle.quest.quest;
 
+import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.Lifecycle;
+import com.mojang.serialization.codecs.EitherCodec;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrarManager;
@@ -16,6 +18,7 @@ import net.minecraft.util.ExtraCodecs;
 import party.lemons.questicle.Questicle;
 import party.lemons.questicle.QuesticleClient;
 import party.lemons.questicle.quest.quest.impl.StandardQuest;
+import party.lemons.questicle.util.QCodecs;
 
 import java.util.Optional;
 
@@ -49,6 +52,7 @@ public class QuestTypes
                                 .orElseGet(() -> DataResult.error(() -> "Unknown registry element in " + REGISTRY.key() + ":" + object))
                 );
         Codec<QuestType<?>> codec2 = ExtraCodecs.idResolverCodec(object -> REGISTRY.getKey(object).isPresent() ? REGISTRY.getRawId(object) : -1, REGISTRY::byRawId, -1);
+
         return ExtraCodecs.overrideLifecycle(ExtraCodecs.orCompressed(codec, codec2), (e)-> Lifecycle.stable(),  (e)->Lifecycle.stable());
     }
 }

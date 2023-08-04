@@ -1,0 +1,19 @@
+{
+  "type": "questicle:texture",
+  "standard": {
+    "texture": "questicle:challenge",
+    "atlas": "questicle:quest_frames"
+  },
+  "hover": {
+    "texture": "questicle:challenge_hover",
+    "atlas": "questicle:quest_frames"
+  },
+  "complete": {
+    "texture": "questicle:challenge_complete",
+    "atlas": "questicle:quest_frames"
+  },
+  "disabled": {
+    "texture": "questicle:challenge_disabled",
+    "atlas": "questicle:quest_frames"
+  }
+}
